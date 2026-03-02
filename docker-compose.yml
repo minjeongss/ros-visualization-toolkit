@@ -1,0 +1,11 @@
+version: "3.8"
+services:
+  ros2_master:
+    build: .
+    container_name: ros2_dev
+    network_mode: "host"
+    volumes:
+      - .:/root/ros2_ws
+    tty: true
+    stdin_open: true
+    privileged: true
