@@ -1,1 +1,8 @@
 /bag/*
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/tsconfig.tsbuildinfo
+frontend/tsconfig.node.tsbuildinfo
+.DS_Store
+backend/csv/
