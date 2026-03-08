@@ -36,8 +36,12 @@ ROS2 bag file visualization toolkit. Monorepo: React + TypeScript frontend, Flas
 │   ├── package.json
 │   ├── tsconfig.json
 │   └── vite.config.ts
-├── backend/                  # Flask API
-│   ├── app.py                # All endpoints
+├── backend/                  # Flask API (Application Factory + Blueprints)
+│   ├── app/
+│   │   ├── __init__.py       # Application Factory (create_app)
+│   │   ├── routes.py         # Blueprint: API endpoints
+│   │   └── services.py       # Business logic (bag parsing, CSV export)
+│   ├── run.py                # Entry point
 │   └── requirements.txt
 ├── bag/                      # ROS2 bag files (SQLite .db3 + metadata.yaml)
 ├── docker-compose.yml
@@ -136,10 +140,10 @@ export default MyComponent
 - **Type hints**: Built-in types (`str`, `int`, `dict`)
 - **Error handling**: Try/except, return `jsonify({'error': '...'}), 400`
 - **Formatting**: Max 100 chars/line, 4 spaces indent
-- **Port**: 5001 (app.py), 5000 (docker-compose)
+- **Port**: 5001 (run.py), 5000 (docker-compose)
 
 ```python
-@app.route('/api/endpoint', methods=['POST'])
+@api_bp.route('/endpoint', methods=['POST'])
 def handle_request():
     data = request.json
     if not data:
