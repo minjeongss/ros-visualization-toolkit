@@ -9,3 +9,25 @@ services:
     tty: true
     stdin_open: true
     privileged: true
+
+  frontend:
+    build: ./frontend
+    container_name: ros_frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - VITE_API_URL=http://localhost:5000
+    command: npm run dev
+
+  backend:
+    build: ./backend
+    container_name: ros_backend
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./backend:/app
+      - ./bag:/app/bag
+    command: python app.py

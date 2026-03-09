@@ -1,0 +1,19 @@
+{
+  "name": "ros-visualization-toolkit",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "frontend"
+  ],
+  "scripts": {
+    "dev": "npm run kill-ports && concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "kill-ports": "lsof -ti:3000 | xargs kill -9 2>/dev/null; lsof -ti:5001 | xargs kill -9 2>/dev/null || true",
+    "dev:backend": "cd backend && pip3 install -r requirements.txt -q 2>/dev/null; python3 run.py",
+    "dev:frontend": "npm run dev --workspace=frontend",
+    "build": "npm run build --workspace=frontend",
+    "lint": "npm run lint --workspace=frontend"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}
